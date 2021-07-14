@@ -10,6 +10,7 @@ import javassist.*;
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -22,7 +23,6 @@ import static com.alibaba.ttl.threadpool.agent.transformlet.helper.TtlTransforml
  *
  * @author Jerry Lee (oldratlee at gmail dot com)
  * @author wuwen5 (wuwen.55 at aliyun dot com)
- * @author Jerry Lee (oldratlee at gmail dot com)
  * @see java.util.concurrent.Executor
  * @see java.util.concurrent.ExecutorService
  * @see java.util.concurrent.ThreadPoolExecutor
@@ -51,7 +51,7 @@ public abstract class AbstractExecutorTtlTransformlet implements TtlTransformlet
      * @param executorClassNames the executor class names to be transformed
      */
     public AbstractExecutorTtlTransformlet(Set<String> executorClassNames, boolean disableInheritableForThreadPool) {
-        this.executorClassNames = executorClassNames;
+        this.executorClassNames = Collections.unmodifiableSet(executorClassNames);
         this.disableInheritableForThreadPool = disableInheritableForThreadPool;
 
         paramTypeNameToDecorateMethodClass.put(RUNNABLE_CLASS_NAME, TTL_RUNNABLE_CLASS_NAME);
