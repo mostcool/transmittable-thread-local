@@ -1,4 +1,4 @@
-# 📌 TransmittableThreadLocal(TTL) 📌
+# [![📌 TransmittableThreadLocal(TTL) 📌](docs/logo-blue.png)](#dummy)
 
 [![Build Status](https://img.shields.io/travis/alibaba/transmittable-thread-local/master?logo=travis-ci&logoColor=white)](https://travis-ci.org/alibaba/transmittable-thread-local)
 [![Windows Build Status](https://img.shields.io/appveyor/ci/oldratlee/transmittable-thread-local/master?label=windows%20build&logo=appveyor&logoColor=white)](https://ci.appveyor.com/project/oldratlee/transmittable-thread-local)
@@ -52,8 +52,7 @@
 
 # 🔧 功能
 
-👉 在使用线程池等会池化复用线程的执行组件情况下，提供`ThreadLocal`值的传递功能，解决异步执行时上下文传递的问题。
-一个`Java`标准库本应为框架/中间件设施开发提供的标配能力，本库功能聚焦 & 0依赖，支持`Java` 17/16/15/14/13/12/11/10/9/8/7/6。
+👉 `TransmittableThreadLocal`(`TTL`)：在使用线程池等会池化复用线程的执行组件情况下，提供`ThreadLocal`值的传递功能，解决异步执行时上下文传递的问题。一个`Java`标准库本应为框架/中间件设施开发提供的标配能力，本库功能聚焦 & 0依赖，支持`Java` 17/16/15/14/13/12/11/10/9/8/7/6。
 
 `JDK`的[`InheritableThreadLocal`](https://docs.oracle.com/javase/10/docs/api/java/lang/InheritableThreadLocal.html)类可以完成父线程到子线程的值传递。但对于使用线程池等会池化复用线程的执行组件的情况，线程由线程池创建好，并且线程是池化起来反复使用的；这时父子线程关系的`ThreadLocal`值传递已经没有意义，应用需要的实际上是把 **任务提交给线程池时**的`ThreadLocal`值传递到 **任务执行时**。
 
@@ -149,7 +148,7 @@ String value = context.get();
 ```
 
 **_注意_**：  
-即使是同一个`Runnable`任务多次提交到线程池时，每次提交时都需要修饰操作（即`TtlRunnable.get(task)`），以抓取当时`TransmittableThreadLocal`上下文的值；即如果同一个任务下一次提交时不执行修饰而仍然使用上一次的`TtlRunnable`，则提交的任务运行时会是上次抓取的上下文。示例代码如下：
+即使是同一个`Runnable`任务多次提交到线程池时，每次提交时都需要通过修饰操作（即`TtlRunnable.get(task)`）以抓取这次提交时的`TransmittableThreadLocal`上下文的值；即如果同一个任务下一次提交时不执行修饰而仍然使用上一次的`TtlRunnable`，则提交的任务运行时会是之前修饰操作所抓取的上下文。示例代码如下：
 
 ```java
 // 第一次提交
@@ -463,6 +462,8 @@ JDK Bug: <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=8021205>
 使用了`TTL`的一部分开源项目：
 
 - **中间件**
+    - [`sofastack/sofa-rpc` ![](https://img.shields.io/github/stars/sofastack/sofa-rpc.svg?style=social&label=Star)](https://github.com/sofastack/sofa-rpc) [![star](https://gitee.com/sofastack/sofa-rpc/badge/star.svg?theme=gray)](https://gitee.com/sofastack/sofa-rpc)  
+      SOFARPC is a high-performance, high-extensibility, production-level Java RPC framework
     - [`dromara/hmily` ![](https://img.shields.io/github/stars/dromara/hmily.svg?style=social&label=Star)](https://github.com/dromara/hmily) [![star](https://gitee.com/dromara/hmily/badge/star.svg?theme=gray)](https://gitee.com/dromara/hmily)  
       Distributed transaction solutions
     - [`siaorg/sia-gateway` ![](https://img.shields.io/github/stars/siaorg/sia-gateway.svg?style=social&label=Star)](https://github.com/siaorg/sia-gateway)  
@@ -474,6 +475,10 @@ JDK Bug: <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=8021205>
       数据库访问框架(data access service)，包括数据库控制台das console，数据库客户端das client和数据库服务端das server三部分
     - [`SimonAlong/Neo` ![](https://img.shields.io/github/stars/SimonAlong/Neo.svg?style=social&label=Star)](https://github.com/SimonAlong/Neo)  
       Orm框架：基于ActiveRecord思想开发的至简化且功能很全的Orm框架
+    - [`didi/ALITA` ![](https://img.shields.io/github/stars/didi/ALITA.svg?style=social&label=Star)](https://github.com/didi/ALITA)  
+      a layer-based data analysis tool
+    - [`didi/daedalus` ![](https://img.shields.io/github/stars/didi/daedalus.svg?style=social&label=Star)](https://github.com/didi/daedalus)  
+      实现快速创建数据构造流程，数据构造流程的可视化、线上化、持久化、标准化
     - [`DataLinkDC/DataLink` ![](https://img.shields.io/github/stars/DataLinkDC/DataLink.svg?style=social&label=Star)](https://github.com/DataLinkDC/DataLink)  
       a new open source solution to bring Flink development to data center
 - **中间件/流程引擎**
@@ -488,8 +493,6 @@ JDK Bug: <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=8021205>
       一个java分布式日志组件，支持百亿级别
     - [`minbox-projects/minbox-logging` ![](https://img.shields.io/github/stars/minbox-projects/minbox-logging.svg?style=social&label=Star)](https://github.com/minbox-projects/minbox-logging) [![star](https://gitee.com/minbox-projects/minbox-logging/badge/star.svg?theme=gray)](https://gitee.com/minbox-projects/minbox-logging)  
       分布式零侵入式、链路式请求日志分析框架。提供Admin端点进行采集日志、分析日志、日志告警通知、服务性能分析等。通过Admin Ui可查看实时链路日志信息、在线业务服务列表
-        - [`minbox-projects/bulldog` ![](https://img.shields.io/github/stars/minbox-projects/bulldog.svg?style=social&label=Star)](https://github.com/minbox-projects/bulldog) [![star](https://gitee.com/minbox-projects/bulldog/badge/star.svg?theme=gray)](https://gitee.com/minbox-projects/bulldog)  
-          一款分布式链路日志跟踪监控框架，支持Openfeign、RestTemplate、Retrofit、HttpClient、OkHttp、RabbitMQ等方式透传链路信息
         - [`minbox-projects/api-boot` ![](https://img.shields.io/github/stars/minbox-projects/api-boot.svg?style=social&label=Star)](https://github.com/minbox-projects/api-boot) [![star](https://gitee.com/minbox-projects/api-boot/badge/star.svg?theme=gray)](https://gitee.com/minbox-projects/api-boot)  
           为接口服务而生的，基于“ SpringBoot”完成扩展和自动配置，内部封装了一系列的开箱即用Starters
     - [`ofpay/logback-mdc-ttl` ![](https://img.shields.io/github/stars/ofpay/logback-mdc-ttl.svg?style=social&label=Star)](https://github.com/ofpay/logback-mdc-ttl)  
@@ -515,6 +518,8 @@ JDK Bug: <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=8021205>
       新一代爬虫平台，以图形化方式定义爬虫流程，不写代码即可完成爬虫
     - [`nekolr/slime` ![](https://img.shields.io/github/stars/nekolr/slime.svg?style=social&label=Star)](https://github.com/nekolr/slime)  
       🍰 一个可视化的爬虫平台
+    - [`zjcscut/octopus` ![](https://img.shields.io/github/stars/zjcscut/octopus.svg?style=social&label=Star)](https://github.com/zjcscut/octopus)  
+      长链接压缩为短链接的服务
     - [`xggz/mqr` ![](https://img.shields.io/github/stars/xggz/mqr.svg?style=social&label=Star)](https://github.com/xggz/mqr) [![star](https://gitee.com/molicloud/mqr/badge/star.svg?theme=gray)](https://gitee.com/molicloud/mqr)  
       茉莉QQ机器人（简称MQR），采用mirai的Android协议实现的QQ机器人服务，通过web控制机器人的启停和配置
 - **业务服务或平台应用**

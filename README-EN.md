@@ -1,4 +1,4 @@
-# 📌 TransmittableThreadLocal(TTL) 📌
+# [![📌 TransmittableThreadLocal(TTL) 📌](docs/logo-blue.png)](#dummy)
 
 [![Build Status](https://img.shields.io/travis/alibaba/transmittable-thread-local/master?logo=travis-ci&logoColor=white)](https://travis-ci.org/alibaba/transmittable-thread-local)
 [![Windows Build Status](https://img.shields.io/appveyor/ci/oldratlee/transmittable-thread-local/master?label=windows%20build&logo=appveyor&logoColor=white)](https://ci.appveyor.com/project/oldratlee/transmittable-thread-local)
@@ -49,7 +49,7 @@
 
 # 🔧 Functions
 
-👉 The missing Java™ std lib(simple & 0-dependency) for framework/middleware,
+👉 `TransmittableThreadLocal`(`TTL`): The missing Java™ std lib(simple & 0-dependency) for framework/middleware,
 provide an enhanced `InheritableThreadLocal` that transmits values between threads even using thread pooling components.
 Support `Java` 17/16/15/14/13/12/11/10/9/8/7/6.
 
@@ -166,7 +166,7 @@ String value = context.get();
 
 ### 2.2 Decorate thread pool
 
-Eliminating the work of `Runnable` and `Callable` Decoration every time it is submitted to thread pool. This work can completed in the thread pool.
+Eliminating the work of `Runnable` and `Callable` Decoration every time it is submitted to thread pool. This work can be completed in the thread pool.
 
 Use util class
 [`com.alibaba.ttl.threadpool.TtlExecutors`](src/main/java/com/alibaba/ttl/threadpool/TtlExecutors.java)
@@ -358,6 +358,8 @@ The code implementation of `TTL` uses the `JDK 8` standard library class, but it
 Some open-source projects used `TTL`:
 
 - **Middleware**
+    - [`sofastack/sofa-rpc` ![](https://img.shields.io/github/stars/sofastack/sofa-rpc.svg?style=social&label=Star)](https://github.com/sofastack/sofa-rpc) [![star](https://gitee.com/sofastack/sofa-rpc/badge/star.svg?theme=gray)](https://gitee.com/sofastack/sofa-rpc)  
+      SOFARPC is a high-performance, high-extensibility, production-level Java RPC framework
     - [`dromara/hmily` ![](https://img.shields.io/github/stars/dromara/hmily.svg?style=social&label=Star)](https://github.com/dromara/hmily) [![star](https://gitee.com/dromara/hmily/badge/star.svg?theme=gray)](https://gitee.com/dromara/hmily)  
       Distributed transaction solutions
     - [`siaorg/sia-gateway` ![](https://img.shields.io/github/stars/siaorg/sia-gateway.svg?style=social&label=Star)](https://github.com/siaorg/sia-gateway)  
@@ -369,6 +371,10 @@ Some open-source projects used `TTL`:
       数据库访问框架(data access service)，包括数据库控制台das console，数据库客户端das client和数据库服务端das server三部分
     - [`SimonAlong/Neo` ![](https://img.shields.io/github/stars/SimonAlong/Neo.svg?style=social&label=Star)](https://github.com/SimonAlong/Neo)  
       Orm框架：基于ActiveRecord思想开发的至简化且功能很全的Orm框架
+    - [`didi/ALITA` ![](https://img.shields.io/github/stars/didi/ALITA.svg?style=social&label=Star)](https://github.com/didi/ALITA)  
+      a layer-based data analysis tool
+    - [`didi/daedalus` ![](https://img.shields.io/github/stars/didi/daedalus.svg?style=social&label=Star)](https://github.com/didi/daedalus)  
+      实现快速创建数据构造流程，数据构造流程的可视化、线上化、持久化、标准化
     - [`DataLinkDC/DataLink` ![](https://img.shields.io/github/stars/DataLinkDC/DataLink.svg?style=social&label=Star)](https://github.com/DataLinkDC/DataLink)  
       a new open source solution to bring Flink development to data center
 - **Middleware/Flow engine**
@@ -410,6 +416,8 @@ Some open-source projects used `TTL`:
       新一代爬虫平台，以图形化方式定义爬虫流程，不写代码即可完成爬虫
     - [`nekolr/slime` ![](https://img.shields.io/github/stars/nekolr/slime.svg?style=social&label=Star)](https://github.com/nekolr/slime)  
       🍰 一个可视化的爬虫平台
+    - [`zjcscut/octopus` ![](https://img.shields.io/github/stars/zjcscut/octopus.svg?style=social&label=Star)](https://github.com/zjcscut/octopus)  
+      长链接压缩为短链接的服务
     - [`xggz/mqr` ![](https://img.shields.io/github/stars/xggz/mqr.svg?style=social&label=Star)](https://github.com/xggz/mqr) [![star](https://gitee.com/molicloud/mqr/badge/star.svg?theme=gray)](https://gitee.com/molicloud/mqr)  
       茉莉QQ机器人（简称MQR），采用mirai的Android协议实现的QQ机器人服务，通过web控制机器人的启停和配置
 - **Business service or platform application**
